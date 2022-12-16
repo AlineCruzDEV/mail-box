@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class MailMap {
 
@@ -42,6 +39,43 @@ public class MailMap {
 
     private boolean isAddressNullOrEmpty(String address) {
         return address.isEmpty() || address.isBlank();
+    }
+
+    public List<String> fetchMailsWithWordsUsingList(List<String> words) {
+        isMailBoxEmpty();
+        List<String> mailAddresses = new ArrayList<>();
+        fetchMailsWithWords(words, mailAddresses);
+        return mailAddresses;
+    }
+
+    public Set<String> fetchMailsWithWordsUsingSet(Set<String> words) {
+        isMailBoxEmpty();
+        Set<String> mailAddresses = new HashSet<>();
+        fetchMailsWithWords(words, mailAddresses);
+        return mailAddresses;
+    }
+
+    private void fetchMailsWithWords(Collection<String> words, Collection<String> mailAddresses) {
+        for (String key : mailBox.keySet()) {
+            for (Mail mail : mailBox.get(key)) {
+                String subject = mail.getSubject().toLowerCase();
+                for (String word : words) {
+                    if (subject.contains(word)) {
+                        if (mailAddresses.contains(mail.getAddress())) {
+                            break;
+                        } else {
+                            mailAddresses.add(mail.getAddress());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void isMailBoxEmpty() {
+        if (mailBox.isEmpty()) {
+            System.out.println("Caixa de emails vazia");
+        }
     }
 
     public void printMails() {
