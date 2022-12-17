@@ -14,7 +14,7 @@ public class Main {
 
         MailMap myMailBox = new MailMap();
 
-        myMailBox.printMails();
+        myMailBox.printMailAddresses();
 
         System.out.println();
         myMailBox.addMail(email1);
@@ -23,7 +23,7 @@ public class Main {
         myMailBox.addMail(email4);
         myMailBox.addMail(email5);
 
-        myMailBox.printMails();
+        myMailBox.printMailAddresses();
 
         System.out.println();
         System.out.println("Total de endereços remetentes: " + myMailBox.totalAddress());
@@ -36,5 +36,14 @@ public class Main {
 
         System.out.println();
         System.out.println("Set de Emails que contem as palavras teste e f1rst: " + myMailBox.fetchMailsWithWordsUsingSet(Set.of("teste", "f1rst")));
+
+        System.out.println();
+        myMailBox.printMailBox();
+
+        System.out.println();
+        myMailBox.removeEmailsBeforeDate(LocalDate.of(2022, 06, 05));
+
+        System.out.println("Remover emails recebidos antes de 06-05-2022: ");
+        myMailBox.printMailBox();
     }
 }

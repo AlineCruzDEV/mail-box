@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.*;
 
 public class MailMap {
@@ -77,14 +78,32 @@ public class MailMap {
             System.out.println("Caixa de emails vazia");
         }
     }
+    public void removeEmailsBeforeDate(final LocalDate date) {
+        for (String key : mailBox.keySet()) {
+            removeEmailsBeforeDateFromAddress(date, key);
+        }
+    }
 
-    public void printMails() {
+    private void removeEmailsBeforeDateFromAddress(LocalDate date, String key) {
+        mailBox.get(key).removeIf(mail -> mail.getDateReceive().isBefore(date));
+    }
+
+    public void printMailAddresses() {
         if (mailBox.isEmpty()) {
             System.out.println("Não há emails");
         } else {
             System.out.println("Você tem emails de: ");
             for (String key : mailBox.keySet()) {
                 System.out.println(key);
+            }
+        }
+    }
+    public void printMailBox() {
+        System.out.println("Sua caixa de entrada");
+        for (String key : mailBox.keySet()) {
+            System.out.println("\n"+ key);
+            for (Mail mail : mailBox.get(key)) {
+                System.out.println(mail);
             }
         }
     }
