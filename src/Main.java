@@ -57,5 +57,7 @@ public class Main {
 
         System.out.println("Lista com os endereços de email vindo de br: " + myMailBox.fetchMailAddressesFromCountry("br"));
 
+        System.out.println();
+        System.out.println("Lista com os endereços que enviaram email em 04-06-2022: " + myMailBox.fetchMailAddressesSentEmailsForDate(LocalDate.of(2022, 06, 04)));
     }
 }

@@ -57,13 +57,12 @@ public class Mail {
 
     @Override
     public String toString() {
-        StringBuilder email = new StringBuilder("------ MENSAGEM ---------\n");
-        email.append("De: " + address + "\n");
-        email.append("Assunto: " + subject + "\n");
-        email.append("Enviada em: " + dateSend + "\n");
-        email.append("Recebida em: " + dateReceive + "\n");
-        email.append("Assunto: " + subject + "\n");
-        email.append(body + "\n" );
-        return email.toString();
+        String email = "------ MENSAGEM ---------\n" + "De: " + address + "\n" +
+                "Assunto: " + subject + "\n" +
+                "Enviada em: " + dateSend + "\n" +
+                "Recebida em: " + dateReceive + "\n" +
+                "Assunto: " + subject + "\n" +
+                body + "\n";
+        return email;
     }
 }

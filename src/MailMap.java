@@ -100,7 +100,19 @@ public class MailMap {
         }
     }
 
-    // Criar uma lista dos endereços que hoje enviaram mails TODO
+    // Criar uma lista dos endereços que hoje enviaram mails - receber uma data
+    public List<String> fetchMailAddressesSentEmailsForDate(LocalDate date) {
+        final List<String> sentMails = new ArrayList<>();
+        for (String key : mailBox.keySet()) {
+            for (Mail mail : mailBox.get(key)) {
+                if (mail.getDateSend().equals(date)) {
+                    sentMails.add(key);
+                    break;
+                }
+            }
+        }
+        return sentMails;
+    }
 
     //Eliminar todos os mails de um dado endereço anteriores a uma data dada
     private void removeEmailsBeforeDateFromAddress(LocalDate date, String key) {
