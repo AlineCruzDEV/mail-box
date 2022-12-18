@@ -5,6 +5,7 @@ public class MailMap {
 
     HashMap<String, List<Mail>> mailBox = new HashMap<>();
 
+    // Guardar um novo email recebido
     public void addMail(Mail mail) {
         if (mail != null) {
             if (mailBox.containsKey(mail.getAddress())) {
@@ -14,16 +15,18 @@ public class MailMap {
                 mailList.add(mail);
                 mailBox.put(mail.getAddress(), mailList);
             }
-            System.out.println(mail);
+            System.out.println("Adicionando... \n" + mail);
         } else {
             System.out.println("Não foi possível adicionar o email. Tente Novamente");
         }
     }
 
+    // Determinar o total de endereços a partir dos quais se recebeu mail
     public int totalAddress() {
         return mailBox.size();
     }
 
+    // Determinar quantos mails têm por origem um dado endereço
     public int totalMailsOriginateFromAddress(String address) {
         int totalMails = 0;
         if (isAddressNullOrEmpty(address))
@@ -42,6 +45,7 @@ public class MailMap {
         return address.isEmpty() || address.isBlank();
     }
 
+    // Criar uma lista com todos os endereços que enviaram mails contendo no seu assunto uma lista de palavras dada como parâmetro
     public List<String> fetchMailsWithWordsUsingList(List<String> words) {
         isMailBoxEmpty();
         List<String> mailAddresses = new ArrayList<>();
@@ -49,6 +53,7 @@ public class MailMap {
         return mailAddresses;
     }
 
+    // O mesmo que a questão anterior, mas criando um conjunto contendo os mails
     public Set<String> fetchMailsWithWordsUsingSet(Set<String> words) {
         isMailBoxEmpty();
         Set<String> mailAddresses = new HashSet<>();
@@ -56,6 +61,7 @@ public class MailMap {
         return mailAddresses;
     }
 
+    // Dada uma lista de palavras, eliminar todos os mails de um dado endereço que no seu assunto contenham uma qualquer destas (anti-spam)
     private void fetchMailsWithWords(Collection<String> words, Collection<String> mailAddresses) {
         for (String key : mailBox.keySet()) {
             for (Mail mail : mailBox.get(key)) {
@@ -78,15 +84,22 @@ public class MailMap {
             System.out.println("Caixa de emails vazia");
         }
     }
+
+    // Eliminar todos os emails recebidos antes de uma data que é dada como parâmetro
     public void removeEmailsBeforeDate(final LocalDate date) {
         for (String key : mailBox.keySet()) {
             removeEmailsBeforeDateFromAddress(date, key);
         }
     }
 
+    //Eliminar todos os mails de um dado endereço anteriores a uma data dada
     private void removeEmailsBeforeDateFromAddress(LocalDate date, String key) {
         mailBox.get(key).removeIf(mail -> mail.getDateReceive().isBefore(date));
     }
+
+    // Criar uma lista dos endereços que hoje enviaram mails TODO
+
+    // Criar uma listagem com todos os endereços de mail oriundos de um determinado país TODO
 
     public void printMailAddresses() {
         if (mailBox.isEmpty()) {
@@ -98,10 +111,11 @@ public class MailMap {
             }
         }
     }
+
     public void printMailBox() {
         System.out.println("Sua caixa de entrada");
         for (String key : mailBox.keySet()) {
-            System.out.println("\n"+ key);
+            System.out.println("\n" + key);
             for (Mail mail : mailBox.get(key)) {
                 System.out.println(mail);
             }

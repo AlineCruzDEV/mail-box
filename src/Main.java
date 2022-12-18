@@ -45,5 +45,9 @@ public class Main {
 
         System.out.println("Remover emails recebidos antes de 06-05-2022: ");
         myMailBox.printMailBox();
+
+        System.out.println();
+        myMailBox.printMailBox();
+
     }
 }
