@@ -49,5 +49,13 @@ public class Main {
         System.out.println();
         myMailBox.printMailBox();
 
+        myMailBox.addMail(email2);
+        myMailBox.addMail(email3);
+
+        System.out.println();
+        myMailBox.printMailBox();
+
+        System.out.println("Lista com os endereços de email vindo de br: " + myMailBox.fetchMailAddressesFromCountry("br"));
+
     }
 }

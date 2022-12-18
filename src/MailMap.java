@@ -5,6 +5,14 @@ public class MailMap {
 
     HashMap<String, List<Mail>> mailBox = new HashMap<>();
 
+    private static boolean validateCountry(String country) {
+        if (country == null) {
+            System.out.println("É necessário informar um país!");
+            return false;
+        } else
+            return true;
+    }
+
     // Guardar um novo email recebido
     public void addMail(Mail mail) {
         if (mail != null) {
@@ -92,14 +100,26 @@ public class MailMap {
         }
     }
 
+    // Criar uma lista dos endereços que hoje enviaram mails TODO
+
     //Eliminar todos os mails de um dado endereço anteriores a uma data dada
     private void removeEmailsBeforeDateFromAddress(LocalDate date, String key) {
         mailBox.get(key).removeIf(mail -> mail.getDateReceive().isBefore(date));
     }
 
-    // Criar uma lista dos endereços que hoje enviaram mails TODO
-
-    // Criar uma listagem com todos os endereços de mail oriundos de um determinado país TODO
+    // Criar uma listagem com todos os endereços de mail oriundos de um determinado país
+    public List<String> fetchMailAddressesFromCountry(String country) {
+        List<String> mailAddressesFromCountry = new ArrayList<>();
+        isMailBoxEmpty();
+        if (validateCountry(country)) {
+            for (String address : mailBox.keySet()) {
+                if (address.endsWith(country)) {
+                    mailAddressesFromCountry.add(address);
+                }
+            }
+        }
+        return mailAddressesFromCountry;
+    }
 
     public void printMailAddresses() {
         if (mailBox.isEmpty()) {
